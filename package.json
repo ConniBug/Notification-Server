@@ -1,0 +1,25 @@
+{
+  "name": "notification-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ConniBug/Notification-Server.git"
+  },
+  "author": "Conni!~#4121",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ConniBug/Notification-Server/issues"
+  },
+  "homepage": "https://github.com/ConniBug/Notification-Server#readme",
+  "dependencies": {
+    "@connibug/js-logging": "^2.0.1",
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3"
+  }
+}
