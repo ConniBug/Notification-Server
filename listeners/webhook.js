@@ -4,30 +4,42 @@ const express = require("express")
 const bodyParser = require("body-parser")
   
 const app = express()
-let PORT
+let PORT = 1234
 app.use(bodyParser.json())
 
-function setupWebhookListener(webhookConfig) {
-  let hookPath = webhookConfig.path
-  l.debug(`Registered webhook listener on /webhooks/${hookPath}`)
-  app.post("/webhooks/" + hookPath, (req, res) => {
+function setupWebhookListener(path) {
+  l.debug(`Registered webhook listener on POST/GET on /webhooks/${path}`)
+  app.post("/webhooks/" + path, (req, res) => {
+    console.log(req.path)
     console.log(req.body)
+    res.status(200).end()
+  });
+  app.get("/webhooks/" + path, (req, res) => {
+    console.log(req.body)
+    console.log(req.path)
     res.status(200).end()
   });
 }
 
 function start() {    
-  app.listen(PORT, () => 
-    l.log(`Started webhook listener on port ${PORT}`));
+
 }
 
 function stop() {
   l.log(`Stopped webhook listener on port ${PORT}`);
 }
 
-function setup(config) {
-  PORT = config.port
-  console.log("Setting up", config)
+function setup() {
+  app.listen(PORT, () => {
+    l.log(`Started webhook listener on port ${PORT}`)
+
+    setupWebhookListener("cars")
+  });
 }
 
-module.exports = { start, stop, setup }
+module.exports = { 
+  start, stop, setup, 
+  info: {
+    name: "webhook"
+  } 
+}
